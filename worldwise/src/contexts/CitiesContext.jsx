@@ -5,13 +5,13 @@ const BASE_URL = 'http://localhost:9000'
 const CitiesContext=createContext();
 function CitiesProvider({children}) {
   const [cities,setCities] = useState([]);
-  const [isLoading , setLoading] = useState(false);
+  const [isLoading , setisLoading] = useState(false);
   const [currentCity,setCurrentCity]= useState({});
 
   useEffect(function(){
-      setLoading(true);
         async function fetchCities(){
             try{
+            setisLoading(true);
             const res = await fetch(`${BASE_URL}/cities`);
             const data = await res.json();
             setCities(data);
@@ -20,7 +20,7 @@ function CitiesProvider({children}) {
           alert ('There is an error while fetching the data...')
         }
         finally{
-          setLoading(false);
+          setisLoading(false);
         }
       }
       fetchCities();
@@ -36,7 +36,7 @@ function CitiesProvider({children}) {
           alert ('There is an error while fetching the data...')
         }
         finally{
-          setLoading(false);
+          setisLoading(false);
         }
   }
   return <CitiesContext.Provider value={{
